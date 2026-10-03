@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Design tokens. Every colour, font and easing lives here, so a final
+   palette swap is a one-file change (per the plan's "working default").
+------------------------------------------------------------------- */
+@theme {
+  --color-espresso: #2b1c14;
+  --color-espresso-soft: #3a261b;
+  --color-terracotta: #b5541f;
+  --color-terracotta-deep: #9a4519; /* small text on cream: keeps AA contrast */
+  --color-terracotta-glow: #e07a3c;
+  --color-cream: #fbf1e6;
+  --color-cream-deep: #f3e3d1;
+  --color-taupe: #6b5245;
+  --color-on-terracotta: #fffaf3;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-serve: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@layer base {
+  html {
+    background: var(--color-espresso);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--color-espresso);
+    background: var(--color-cream);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    /* Fraunces "SOFT" axis rounds the terminals: warm, not fashion-thin. */
+    font-variation-settings: "SOFT" 100, "WONK" 0;
+    font-optical-sizing: auto;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-terracotta-glow);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: var(--color-terracotta);
+    color: var(--color-on-terracotta);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .pb-safe { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+}
+
+/* Highlight that glides across the cloche in the first beat (0.0-0.8s). */
+@keyframes cloche-sweep {
+  from { transform: translateX(0) skewX(-18deg); }
+  to   { transform: translateX(1300px) skewX(-18deg); }
+}
+.cloche-sweep {
+  animation: cloche-sweep 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both;
+}
