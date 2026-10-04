@@ -98,3 +98,27 @@ All five featured dishes on the Home page and in Chef's Picks now use real photo
   and `data/menu.js` actually uses), so real photos silently failed to show there. Also added the
   same real-photo support to `ChefsPicks.jsx` and the Order page's `CartLine.jsx` /
   `AddMoreItems.jsx`, which previously always rendered the illustration even when a photo existed.
+
+## Phase 7 (Hero redesign: full-bleed background)
+
+- The hero photo is now the section's true full-bleed background (behind the nav, the cloche, and
+  the text), not a framed card above the headline. The cloche still sits centered over it and
+  lifts away on the same reveal timing as before — only the layout changed, not the animation.
+- Added two static gradient scrims (top, for nav legibility; bottom, for headline/CTA legibility)
+  so text reads clearly regardless of what's in that part of the photo, without flattening the
+  photo itself.
+- Re-verified every existing hero behaviour still holds after the rewrite: skip button, Esc-to-skip,
+  once-per-session play, `?intro=1` replay, reduced-motion instant state, and CTA focus being
+  inert until visible — all pass.
+
+## Phase 8 (The Room: first real interior photos)
+
+- Three of four supplied photos used in `data/room.js`: dining room, bar, kitchen — cropped to the
+  strip's 4:5 card ratio (upper-middle-biased crop, since that's usually where the interest sits
+  in a portrait interior shot).
+- **Excluded**: the fourth photo, supplied for "Corner tables", visibly showed a different,
+  established restaurant's interior — a "LAYLA KITCHEN & COFFEE" neon sign and a menu booklet
+  labelled "LAYLA" are both in shot, plus a "@reallygreatsite" (Canva template) watermark. Using it
+  would have shown a real competitor's venue as if it were Prestige Kitchen's own, so it was left
+  out entirely. That slot stays on its illustrated placeholder in `data/room.js` until a real photo
+  of the restaurant's own corner tables is supplied.
